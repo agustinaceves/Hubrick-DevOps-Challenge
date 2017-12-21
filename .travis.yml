@@ -1,15 +1,18 @@
 language: ruby
-
+sudo: false
 rvm:
-  - 2.1.7
-
-sudo: required
-dist: trusty
-group: deprecated-2017Q4
-
-branches:
-  only:
-  - master
+  - 2.0.0
+  - 2.1.10
+  - 2.2.8
+  - 2.3.5
+  - 2.4.2
+  - ruby-head
+  - jruby-9.1.15.0
+  - jruby-head
+before_script:
+  - unset JRUBY_OPTS
+  - unset _JAVA_OPTIONS
+script: ruby -Ilib exe/rake
 
 notifications:
   email:
