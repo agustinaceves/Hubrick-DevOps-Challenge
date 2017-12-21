@@ -17,9 +17,9 @@ group: deprecated-2017Q4
 before_install:
   - sudo usermod -p "`openssl passwd -1 'travis'`" travis
 
-script:
-  - bundle exec rake
-  - bundle exec kitchen verify ubuntu
+#script:
+#  - bundle exec rake
+#  - bundle exec kitchen verify ubuntu
 
 branches:
   only:
