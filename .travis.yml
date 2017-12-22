@@ -1,17 +1,17 @@
-language: ruby
-sudo: false
-rvm:
-  - 2.0.0
-  - ruby-head
-  - jruby-9.1.15.0
-  - jruby-head
-before_script:
-  - unset JRUBY_OPTS
-  - unset _JAVA_OPTIONS
+rvm: 2.2
 
-notifications:
-  email:
-    recipients:
-      - jose.aceves.chamosa@gmail.com
-    on_success: always
-    on_failure: always 
+sudo: required
+services: docker
+
+env:
+  matrix:
+  - INSTANCE=default-ubuntu-1604
+
+before_install: curl -L https://www.getchef.com/chef/install.sh | sudo bash -s -- -P chefdk -v 0.18.30
+
+install: chef exec bundle install --jobs=3 --retry=3 --without='vagrant'
+
+# https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
+before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
+
+script: travis_retry chef exec bundle exec rake integration:docker[${INSTANCE}]

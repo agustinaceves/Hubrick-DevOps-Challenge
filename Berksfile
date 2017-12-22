@@ -1,4 +1,7 @@
-# frozen_string_literal: true
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 source 'https://supermarket.chef.io'
 
 metadata
+cookbook 'apt'
